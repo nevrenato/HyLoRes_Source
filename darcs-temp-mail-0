@@ -1,0 +1,5 @@
+1 patch for repository http://www.glyc.dc.uba.ar/intohylo/repos/hylores:
+
+Wed Apr 11 12:46:34 WEST 2012  nevrenato@gmail.com
+  * Changed the code, so it can be compiled in ghc >=7
+  

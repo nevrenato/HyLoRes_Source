@@ -1,0 +1,41 @@
+# This file is under darcs' version control for this project. Don't delete!
+# Boring file regexps:
+\.hi$
+\.o$
+\.o\.cmd$
+# *.ko files aren't boring by default because they might
+# be Korean translations rather than kernel modules.
+# \.ko$
+\.ko\.cmd$
+\.mod\.c$
+(^|/)\.tmp_versions($|/)
+(^|/)CVS($|/)
+(^|/)RCS($|/)
+~$
+#(^|/)\.[^/]
+(^|/)_darcs($|/)
+\.bak$
+\.BAK$
+\.orig$
+(^|/)vssver\.scc$
+\.swp$
+(^|/)MT($|/)
+(^|/)\{arch\}($|/)
+(^|/).arch-ids($|/)
+(^|/),
+\.class$
+\.prof$
+(^|/)\.DS_Store$
+(^|/)BitKeeper($|/)
+(^|/)ChangeSet($|/)
+(^|/)\.svn($|/)
+\.py[co]$
+\#
+\.cvsignore$
+(^|/)Thumbs\.db$
+(^|/)autom4te\.cache($|/)
+
+# Cabal stuff
+(^|/)dist($|/)
+.setup-config
+.hyloresrc

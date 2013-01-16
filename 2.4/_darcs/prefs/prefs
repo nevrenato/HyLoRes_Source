@@ -1,0 +1,2 @@
+boringfile .boring
+test runghc -isrc -fobject-code -fglasgow-exts -XUndecidableInstances -XOverlappingInstances tests/test-example-formulas.hs examples/sat examples/unsat && runghc -isrc -fobject-code -XUndecidableInstances -XOverlappingInstances tests/run-unit-tests.hs

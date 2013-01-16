@@ -1,0 +1,207 @@
+[Formula.hs]
+
+- Los nuevos constructores de fórmulas sólo arman fórmulas en NNF
+- No se exportan constructores de tipos (done)
+- Agregué renombre de tipos para nom, var, prop y rel (done)
+
+- show actualizada (done)
+- showAnd se convirtió en showInfixOp (para que trabajen igual & y |) (done)
+- se agregó listAtDis, simétrica a listAtCon, aunque *no sé si se va a usar* (done)
+
+- isDis se actualizó y se renombró como isAtDis (done)
+- isNeg se renombró como isAtNeg, y se actualizó (done)
+- isBox se renombró como isAtBox (aunque no se usa) (done)
+- isUbox se renombró como isAtUbox (aunque no se usa) (done)
+- isBoxNR se renombró como isAtBoxNR (no me termina de convencer su aridad) (done)
+- isDia se actualizó y se renombró como isAtDia (done)
+- isArr se renombró como isAtArr (done)
+- isRef se actualizó y se renombró como isSelfNeg (done)
+- isFalse se actualizó y se renombró como isAtFalse (done)
+- traje isTrue que estaba en Clause (done)
+- isPar no se usaba; la cambié por isEq que es un poco más general (done)
+- isRel se actualizó pero se le cambió la aridad (done)
+- isNom la saqué, no se usa y ya estaba formulaPrefix (done)
+- se renombró formulaPrefix como prefix (done)
+- se agregó removePrefix (done)
+- seAgregó isComplementaryLiteralOf, para suplir el pattern matching que se 
+  hacía en Clause.hasComp (done)
+- se agregó boxConsequent, usada para resolver la regla box en PrefRes (done)
+- se agregó arrConsequent, usada para resolver la regla arr en PrefRes (done)
+
+- formulaVar se actualizó y se renombró como countAtoms (done)
+- formulaDepth se actualizó (done)
+- formulaSize se actualizó. *ojo, ahora computo distinto el tamaño; e.g. antes [r]p valía
+  2 (1 por p y 1 por [r]), ahora vale 3 (1 por p, 1 por [] y 1 por r)* (done)
+
+- subNominForm actualizada, se renombró como replaceNom (done)
+- subVarinForm actualizada, se renombró cómo replaceVar (done)
+- hasNom actualizada (done)
+
+- Funciones constructoras para fórmulas (done):
+- saqué nf, nfs y listCon (sólo las usaba el parser, la forma normal se garantiza 
+  ahora por construcción) (done)
+- saqué simpleNeg, la reemplaza neg (done)
+- saqué isDAt y delDAt, ya no tenían sentido (done)
+
+
+- cambiar lpo (done):
+- agregué el tipo FormulaArg (done)
+- reemplazo order, toOrder y outercomp por precedenceCmp (done)
+- VER SI EN precedenceCmp ESTAN BIEN down y X (PENDIENTE)
+- getFormArgs ahora trabaja con FormulaArg; At y Atv devuelven los parámetros swapeados (done)
+- saqué getHighestRel y lpoR (done)
+- lpoCmp actualizada y renombrada como admOrdCmp(done)
+- lpo trabaja sobre FormulaArg; ya no distingue casos (done)
+- isGreaterLpo actualizada y se renombró como isGreaterThanAll (done)
+- isGreaterLpoComplex actualizada y se renombró como isGTLpoComplex(done)
+- existsGreaterEqualLpo actualizada (done)
+
+[SimpleClause.hs]
+
+- Módulo nuevo; el tipo SimpleClause es lo que solía ser Clause (done)
+
+[FastClause.hs]
+
+- Módulo nuevo; el tipo FastClause es algo así como una cruza entre Clause y
+  IClause.
+
+[SelClause.hs]
+
+- Módulo nuevo; el tipo SelClause agrega funciones de selección a FastClause
+
+[Clause.hs]
+
+- SE SACO EL MODULO (done)
+- saqué refElim porque no se usaba en ningún lado (done)
+- normalizeClause ya no aplica delDAt (done)
+- mandé isTrue a Formula, donde tenía más sentido (done)
+- hasComp no hace más pattern matching (done)
+- isTaut actualizada (done)
+- uso IFormula y ClauseId donde se usaba Int (done)
+- traje tradClause desde Fmap (porque se invirtieron las dependencias entre los módulos) (done)
+- reescribí el compare de CompClause, entiendo que debería quedar más eficiente (done)
+
+
+[HyLoParse.y]
+
+- actualizado (done)
+
+[Fmap.hs]
+
+- se agregó IFormula como renombre de Int (done)
+- safegetFormula actualizada; getFormula puesta en función de safegetFormula (done)
+- safegetIndex actualizada; getIndex puesta en función de safegetIndex (done)
+- insertInRepIdx actualizada; insertInRep puesta en función de insertInRepIdx (done)
+- se mandó tradClause a Clause (porque se invirtieron las dependencias entre los módulos) (done)
+
+[PrettyPrint.hs]
+
+- se renombró prindDelayedDiamond como printDelayedDiamond (done)
+- mprintGiven actualizada (done)
+- saqué mprintNumClause (done)
+- agregué mprintTaggedClause (done)
+- agregué mprintSimpleClause y mprintSimpleClauseWithTag (done)
+- mprintRES actualizada (done)
+- mprintBox actualizada (done)
+- showNew actualizada (done)
+- agregué commaSeparate (done)
+- mprintDis, mprintCon, mprintDia, mprintArr, mprintParBack actualizadas y 
+  puestas en función de mprintRule; mprintParBack se renombró como 
+  mprintParamMain (done)
+- mprintPar actualizada y renombrada como mprintParamAux (done)
+- mprintClauses actualizada (done)
+- mprintInUse y mprintPenDia actualizadas (done)
+
+[Subsumption.hs]
+
+- mselectGiven actualizada (done)
+- saqué el resto de las auxiliares (done)
+- mselectGiven quedó bastante compacta, habría que mandarla a otro módulo
+  (y borrar subsumption) (PENDIENTE)
+
+[Cset.hs]
+
+- SE SACO EL MODULO (done)
+- saqué el import de IClause (estoy viendo dónde se usa) (done)
+- usa SimpleClause en lugar de Clause (done)
+- saqué SimpleCSet que no se usaba en ningún lado
+
+
+[OrderedTree.hs]
+
+- las versiones públicas de insertOTL y setSubsCl trabajan con FastClause en lugar de
+  hacerlo con [Int] (pero usan la vieja versión) (done)
+- reescribir insertOTL, setSubsCl por performance (PENDIENTE)
+- saqué addToSubTree, que no se usaba (así tengo menos código para mantener) (done)
+- saqué clSubsSet, que ya no se usaba (se usaba en LR en full subsumption), así
+  tengo menos código que mantener (de última, está en el cvs) (done)
+
+
+[LR.hs]
+
+- saqué referencia SimpleCSet que no se usaba (done)
+- saqué el import de Cset (done)
+- el tipo Clauses ahora es un ComplClauseSet y no un ComCset (done)
+- cambié myInit para que construya bien Clauses (done)
+- saqué la función emptyClauses (done)
+- InUse ahora es una lista de SimpleClause (done)
+- New ahora es una lista de SelClause (done)
+- myInit actualizada (done)
+- se agregó insertClauseInRep como auxiliar (done)
+- agregué showSelFunc, pero la hardcodié como nil. faltaría agregarla a LR (done)
+- agregar la función de selección a LR (ojo, esti va a convertir a LR en un
+  tipo paramétrico) (PENDIENTE)
+- loadClauses actualizada (done)
+- addToNew actualizada (done)
+- emptyInNew actualizada (done)
+- en mPurgeAll hay que sacar el llamado a showSelFunc cuando la función de selección
+  sea parte de la mónada (PENDIENTE)
+- mpurgeAll actualizada. saqué la parte de full subsumption porque no se estaba usando
+  y dejarla implicaba más código para mantener.... (de última está el cvs...) (done)
+- saqué filterCL y filterIU, que sólo se usaban en full subsumption (done)
+- addToInUse, maddToInUse, maddToPenDia y addToPenDia actualizadas (done)
+- se sacaron los imports de EdisonPrelude y CPUTime (done)
+- se agregaron mshowInUseMainRes y mshowInUseAuxRes (done)
+- se agregaron mshowInUseMainBox y mshowInUseAuxBox (done)
+- se agregó mshowInUseAuxParam (done)
+- resolver mshowInUseMainRes, mshowInUseAuxRes, mshowInUseMainBox, mshowInUseAuxBox
+  y mshowInUseAuxParam usando estructuras separadas (PENDIENTE)
+
+[PrefRes.hs]
+
+- mprintDis actualizada y se sacó formSplitDis (done)
+- mprintCon actualizada y se sacó makeCListFromCon (done)
+- mtestRes actualizada y se sacó findOpposedAndDelete (done)
+- mtestBox actualizada y se sacaron delRel, delBox, findBoxAndDelete 
+  y findRelAndDelete (done)
+- mtestPar y mtestParBack actualizadas; se las renombró como mtestParamAux y
+  mtestParamMain y se sacó modulateGiven (done)
+- mtestArr actualizada y se sacó sepArr (done)
+- mtestDia y existDia actualizadas, se sacó sepDia (done)
+- mresolve actualizada (done)
+- solve actualizada (done)
+
+
+----------------------------------------
+
+Orden de dependencias entre módulos:
+
+Base
+HyLoLex (Base)
+Formula (Base)
+Fmap (Formula)
+SimpleClause(Formula)
+FastClause (Formula, Fmap, SimpleClause)
+SelClause (Formula, Fmap, FastClause)
+
+
+Clause (Formula, FMap)
+
+Cset (Clause, SimpleClause) 
+OrderedTree(Base, Fmap, SimpleClause, Clause)
+
+HyLoParse (HyLoLex, Formula, SimpleClause, Cset)
+LR (Base, Formula, Fmap, SimpleClause, SelClause, OrderedTree)
+Subsumption(LR, ComplClauseSet)
+PrettyPrint (LR, SimpleClause, SelClause, ComplClauseSet)
+PrefRes (Base, Formula, Fmap, Clause, Cset, OrderedTree, PrettyPrint, Subsumption, LR)

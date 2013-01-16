@@ -1,0 +1,8 @@
+You need to configure, build and install hylores in order to use it. The usual steps would be:
+
+$ runhaskell Setup.lhs configure --prefix=$HOME --user
+$ runhaskell Setup.lhs build
+$ runhaskell Setup.lhs install
+
+
+Refer to the Cabal documentations for more options (http://www.haskell.org/cabal)
